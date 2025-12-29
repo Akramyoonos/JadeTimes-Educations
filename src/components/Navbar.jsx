@@ -8,6 +8,8 @@ const Navbar = () => {
     const [activeMenu, setActiveMenu] = useState(null);
     const [activeTab, setActiveTab] = useState('Fields of study');
     const [activeResourceTab, setActiveResourceTab] = useState('Scholarships');
+    const [mobileActiveTab, setMobileActiveTab] = useState(null);
+    const [mobileActiveResourceTab, setMobileActiveResourceTab] = useState(null);
 
     const toggleMenu = (menu) => {
         if (activeMenu === menu) {
@@ -150,7 +152,7 @@ const Navbar = () => {
 
             {/* Megamenu Overlay */}
             {activeMenu === 'programs' && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-[1150px] bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] z-40 p-8 mt-2 animate-in fade-in slide-in-from-top-4 duration-200 border border-gray-100">
+                <div className="hidden md:block absolute top-full left-1/2 -translate-x-1/2 w-[1150px] bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] z-40 p-8 mt-2 animate-in fade-in slide-in-from-top-4 duration-200 border border-gray-100">
                     <div className="w-full">
                         <div className="flex flex-col lg:flex-row gap-12">
                             {/* Main Content Container */}
@@ -223,7 +225,7 @@ const Navbar = () => {
 
             {/* Resources Megamenu */}
             {activeMenu === 'resources' && (
-                <div className="absolute top-full left-1/2 -translate-x-1/2 w-[1150px] bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] z-40 p-8 mt-2 animate-in fade-in slide-in-from-top-4 duration-200 border border-gray-100">
+                <div className="hidden md:block absolute top-full left-1/2 -translate-x-1/2 w-[1150px] bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] z-40 p-8 mt-2 animate-in fade-in slide-in-from-top-4 duration-200 border border-gray-100">
                     <div className="w-full">
                         <div className="flex flex-col lg:flex-row gap-12">
 
@@ -356,14 +358,78 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 z-30">
-                    <div className="px-4 pt-2 pb-6 space-y-2">
-                        <a href="#" className="flex items-center gap-3 px-3 py-3 text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-50 rounded-lg">
-                            <Compass className="w-5 h-5" /> Programs
-                        </a>
-                        <a href="#" className="flex items-center gap-3 px-3 py-3 text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-50 rounded-lg">
-                            <FileText className="w-5 h-5" /> Resources
-                        </a>
+                <div className="md:hidden bg-white border-t border-gray-100 shadow-lg absolute w-full left-0 z-30 h-[calc(100vh-72px)] overflow-y-auto">
+                    <div className="px-4 pt-2 pb-6 space-y-1">
+                        {/* Programs Mobile */}
+                        <div>
+                            <button
+                                onClick={() => toggleMenu('programs')}
+                                className={`flex items-center justify-between w-full px-3 py-3 text-base font-medium rounded-lg transition-colors ${activeMenu === 'programs' ? 'bg-teal-50 text-teal-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                            >
+                                <span className="flex items-center gap-3"><Compass className="w-5 h-5" /> Programs</span>
+                                <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${activeMenu === 'programs' ? 'rotate-180' : ''}`} />
+                            </button>
+                            {activeMenu === 'programs' && (
+                                <div className="space-y-1 mt-1 mb-2 animate-in fade-in slide-in-from-top-2">
+                                    {Object.keys(programsData).map((tab) => (
+                                        <div key={tab}>
+                                            <button
+                                                onClick={() => setMobileActiveTab(mobileActiveTab === tab ? null : tab)}
+                                                className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-600 hover:text-teal-600 pl-11"
+                                            >
+                                                {tab}
+                                                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileActiveTab === tab ? 'rotate-180' : ''}`} />
+                                            </button>
+                                            {mobileActiveTab === tab && (
+                                                <div className="bg-gray-50 rounded-lg mx-3 p-3 space-y-3 animate-in fade-in zoom-in-95">
+                                                    {programsData[tab].flat().map((item, idx) => (
+                                                        <a key={idx} href="#" className="block text-sm text-gray-500 hover:text-teal-600 transition-colors">
+                                                            {item}
+                                                        </a>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
+                        {/* Resources Mobile */}
+                        <div>
+                            <button
+                                onClick={() => toggleMenu('resources')}
+                                className={`flex items-center justify-between w-full px-3 py-3 text-base font-medium rounded-lg transition-colors ${activeMenu === 'resources' ? 'bg-teal-50 text-teal-700' : 'text-gray-700 hover:bg-gray-50'}`}
+                            >
+                                <span className="flex items-center gap-3"><FileText className="w-5 h-5" /> Resources</span>
+                                <ChevronDown className={`w-5 h-5 transition-transform duration-200 ${activeMenu === 'resources' ? 'rotate-180' : ''}`} />
+                            </button>
+                            {activeMenu === 'resources' && (
+                                <div className="space-y-1 mt-1 mb-2 animate-in fade-in slide-in-from-top-2">
+                                    {Object.keys(resourcesData).map((tab) => (
+                                        <div key={tab}>
+                                            <button
+                                                onClick={() => setMobileActiveResourceTab(mobileActiveResourceTab === tab ? null : tab)}
+                                                className="flex items-center justify-between w-full px-3 py-2 text-sm font-medium text-gray-600 hover:text-teal-600 pl-11"
+                                            >
+                                                {tab}
+                                                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${mobileActiveResourceTab === tab ? 'rotate-180' : ''}`} />
+                                            </button>
+                                            {mobileActiveResourceTab === tab && (
+                                                <div className="bg-gray-50 rounded-lg mx-3 p-3 space-y-3 animate-in fade-in zoom-in-95">
+                                                    {resourcesData[tab].columns.map(col => col.items).flat().map((item, idx) => (
+                                                        <a key={idx} href="#" className="block text-sm text-gray-500 hover:text-teal-600 transition-colors">
+                                                            {item}
+                                                        </a>
+                                                    ))}
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
+                                </div>
+                            )}
+                        </div>
+
                         <div className="border-t border-gray-100 my-2"></div>
                         <Link to="/login" className="flex items-center gap-3 px-3 py-3 text-base font-medium text-gray-700 hover:text-teal-600 hover:bg-gray-50 rounded-lg">
                             <ArrowRightToLine className="w-5 h-5" /> Sign in

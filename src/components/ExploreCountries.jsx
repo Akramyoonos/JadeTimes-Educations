@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
 
 const ExploreCountries = () => {
     const [activeTab, setActiveTab] = useState('Europe');
@@ -125,10 +126,10 @@ const ExploreCountries = () => {
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
-                <div className="mb-8">
+                <ScrollReveal className="mb-8">
                     <h2 className="text-[28px] font-bold text-[#212121] mb-2">Explore study abroad countries</h2>
                     <p className="text-gray-600 text-[16px]">Roam through our detailed breakdowns of the study destinations around the world!</p>
-                </div>
+                </ScrollReveal>
 
                 {/* Tabs */}
                 <div className="flex border-b border-gray-200 mb-8 overflow-x-auto no-scrollbar">
@@ -149,46 +150,48 @@ const ExploreCountries = () => {
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {countries.map((country, index) => (
-                        <div key={index} className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 group cursor-pointer">
-                            {/* Image */}
-                            <div className="h-40 overflow-hidden relative">
-                                <img
-                                    src={country.image}
-                                    alt={country.name}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
-                            </div>
-
-                            {/* Content */}
-                            <div className="p-5">
-                                {/* Badge */}
-                                <div className="inline-block bg-[#E8F5E9] text-[#2E7D32] text-[11px] font-bold px-2 py-1 rounded mb-3">
-                                    {country.programs}
+                        <ScrollReveal key={`${activeTab}-${index}`} delay={`delay-${index * 100}`} className="h-full">
+                            <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100 group cursor-pointer h-full flex flex-col">
+                                {/* Image */}
+                                <div className="h-40 overflow-hidden relative flex-shrink-0">
+                                    <img
+                                        src={country.image}
+                                        alt={country.name}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    />
                                 </div>
 
-                                <h3 className="text-[18px] font-bold text-[#212121] mb-2 group-hover:text-[#a4165e] transition-colors">
-                                    {country.name}
-                                </h3>
+                                {/* Content */}
+                                <div className="p-5 flex flex-col flex-grow">
+                                    {/* Badge */}
+                                    <div className="inline-block bg-[#E8F5E9] text-[#2E7D32] text-[11px] font-bold px-2 py-1 rounded mb-3 self-start">
+                                        {country.programs}
+                                    </div>
 
-                                <p className="text-[13px] text-gray-600 leading-relaxed mb-4 line-clamp-3">
-                                    {country.description}
-                                </p>
+                                    <h3 className="text-[18px] font-bold text-[#212121] mb-2 group-hover:text-[#a4165e] transition-colors">
+                                        {country.name}
+                                    </h3>
 
-                                <div className="flex items-center text-[#a4165e] text-[13px] font-semibold group/link">
-                                    Read more
-                                    <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover/link:translate-x-1" />
+                                    <p className="text-[13px] text-gray-600 leading-relaxed mb-4 line-clamp-3">
+                                        {country.description}
+                                    </p>
+
+                                    <div className="flex items-center text-[#a4165e] text-[13px] font-semibold group/link mt-auto">
+                                        Read more
+                                        <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover/link:translate-x-1" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
                     ))}
                 </div>
 
                 {/* Footer Link */}
-                <div className="mt-8">
+                <ScrollReveal className="mt-8" delay="delay-300">
                     <a href="#" className="inline-block text-[#333333] hover:text-[#a4165e] font-medium text-[15px] border-b border-[#333333] hover:border-[#a4165e] transition-colors pb-0.5">
                         View all destination guides
                     </a>
-                </div>
+                </ScrollReveal>
 
             </div>
         </div>

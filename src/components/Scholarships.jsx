@@ -1,5 +1,6 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
+import ScrollReveal from './ScrollReveal';
 
 const Scholarships = () => {
     const scholarships = [
@@ -34,55 +35,57 @@ const Scholarships = () => {
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
-                <div className="mb-10">
+                <ScrollReveal className="mb-10">
                     <h2 className="text-[28px] font-bold text-[#212121] mb-2">Scholarships for international students</h2>
                     <p className="text-gray-600 text-[16px]">Apply for one of 8 educations.com scholarships!</p>
-                </div>
+                </ScrollReveal>
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {scholarships.map((item, index) => (
-                        <div key={index} className="bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:shadow-lg transition-all border border-gray-100 group cursor-pointer flex flex-col h-full">
-                            {/* Image */}
-                            <div className="h-48 overflow-hidden relative">
-                                <img
-                                    src={item.image}
-                                    alt={item.title}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                                />
-                            </div>
-
-                            {/* Content */}
-                            <div className="p-5 flex flex-col flex-grow">
-                                {/* Badges */}
-                                <div className="flex items-center gap-2 mb-4">
-                                    <span className="bg-[#E8F5E9] text-[#2E7D32] text-[11px] font-bold px-2 py-1 rounded uppercase tracking-wide">
-                                        {item.amount}
-                                    </span>
-                                    <span className="bg-gray-100 text-gray-600 text-[11px] font-bold px-2 py-1 rounded uppercase tracking-wide">
-                                        {item.deadline}
-                                    </span>
+                        <ScrollReveal key={index} delay={`delay-${index * 100}`} className="h-full">
+                            <div className="bg-white rounded-xl overflow-hidden shadow-[0_2px_8px_rgba(0,0,0,0.08)] hover:shadow-lg transition-all border border-gray-100 group cursor-pointer flex flex-col h-full">
+                                {/* Image */}
+                                <div className="h-48 overflow-hidden relative">
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                                    />
                                 </div>
 
-                                <h3 className="text-[16px] font-bold text-[#212121] mb-4 leading-snug group-hover:text-[#a4165e] transition-colors line-clamp-2">
-                                    {item.title}
-                                </h3>
+                                {/* Content */}
+                                <div className="p-5 flex flex-col flex-grow">
+                                    {/* Badges */}
+                                    <div className="flex items-center gap-2 mb-4">
+                                        <span className="bg-[#E8F5E9] text-[#2E7D32] text-[11px] font-bold px-2 py-1 rounded uppercase tracking-wide">
+                                            {item.amount}
+                                        </span>
+                                        <span className="bg-gray-100 text-gray-600 text-[11px] font-bold px-2 py-1 rounded uppercase tracking-wide">
+                                            {item.deadline}
+                                        </span>
+                                    </div>
 
-                                <div className="mt-auto pt-2 flex items-center text-[#a4165e] text-[13px] font-semibold group/link">
-                                    Read more
-                                    <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover/link:translate-x-1" />
+                                    <h3 className="text-[16px] font-bold text-[#212121] mb-4 leading-snug group-hover:text-[#a4165e] transition-colors line-clamp-2">
+                                        {item.title}
+                                    </h3>
+
+                                    <div className="mt-auto pt-2 flex items-center text-[#a4165e] text-[13px] font-semibold group/link">
+                                        Read more
+                                        <ChevronRight className="w-4 h-4 ml-1 transition-transform group-hover/link:translate-x-1" />
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
                     ))}
                 </div>
 
                 {/* Footer Link */}
-                <div className="mt-8">
+                <ScrollReveal className="mt-8" delay="delay-300">
                     <a href="#" className="inline-block text-[#333333] hover:text-[#a4165e] font-medium text-[15px] border-b border-[#333333] hover:border-[#a4165e] transition-colors pb-0.5">
                         View all scholarships
                     </a>
-                </div>
+                </ScrollReveal>
 
             </div>
         </div>

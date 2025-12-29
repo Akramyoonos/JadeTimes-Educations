@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollReveal from './ScrollReveal';
 
 const StudentGuides = () => {
     const guides = [
@@ -45,37 +46,39 @@ const StudentGuides = () => {
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
 
                 {/* Header */}
-                <div className="mb-12">
+                <ScrollReveal className="mb-12">
                     <h2 className="text-[28px] font-bold text-[#212121] mb-2">Guides for international students</h2>
                     <p className="text-gray-600 text-[16px]">Learn how to pick the right degree, get scholarships, and move abroad!</p>
-                </div>
+                </ScrollReveal>
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
                     {guides.map((guide, index) => (
-                        <div key={index} className="flex gap-4 group cursor-pointer">
-                            {/* Image */}
-                            <div className="w-[120px] h-[80px] flex-shrink-0 overflow-hidden rounded-lg">
-                                <img
-                                    src={guide.image}
-                                    alt={guide.title}
-                                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                                />
-                            </div>
+                        <ScrollReveal key={index} delay={`delay-${index * 100}`}>
+                            <div className="flex gap-4 group cursor-pointer h-full">
+                                {/* Image */}
+                                <div className="w-[120px] h-[80px] flex-shrink-0 overflow-hidden rounded-lg">
+                                    <img
+                                        src={guide.image}
+                                        alt={guide.title}
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                    />
+                                </div>
 
-                            {/* Content */}
-                            <div className="flex flex-col">
-                                <span className="text-[11px] font-medium text-gray-500 mb-1">
-                                    {guide.date}
-                                </span>
-                                <h3 className="text-[15px] font-bold text-[#212121] leading-snug mb-1 group-hover:text-[#a4165e] transition-colors">
-                                    {guide.title}
-                                </h3>
-                                <p className="text-[13px] text-gray-600 leading-relaxed line-clamp-2">
-                                    {guide.description}
-                                </p>
+                                {/* Content */}
+                                <div className="flex flex-col">
+                                    <span className="text-[11px] font-medium text-gray-500 mb-1">
+                                        {guide.date}
+                                    </span>
+                                    <h3 className="text-[15px] font-bold text-[#212121] leading-snug mb-1 group-hover:text-[#a4165e] transition-colors">
+                                        {guide.title}
+                                    </h3>
+                                    <p className="text-[13px] text-gray-600 leading-relaxed line-clamp-2">
+                                        {guide.description}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        </ScrollReveal>
                     ))}
                 </div>
 

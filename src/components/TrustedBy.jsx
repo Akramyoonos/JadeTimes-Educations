@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollReveal from './ScrollReveal';
 
 // Importing images
 import bostonUni from '../assets/Images/boston_university_qoxffs.png';
@@ -51,35 +52,39 @@ const TrustedBy = () => {
     return (
         <div className="bg-white py-5 border-b border-gray-100 overflow-hidden">
             <div className="max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 mb-8">
-                <p className="text-center text-gray-600 text-[13px] font-semibold uppercase tracking-wider">
-                    Trusted by 13,000+ universities worldwide
-                </p>
+                <ScrollReveal>
+                    <p className="text-center text-gray-600 text-[13px] font-semibold uppercase tracking-wider">
+                        Trusted by 13,000+ universities worldwide
+                    </p>
+                </ScrollReveal>
             </div>
 
-            <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
-                <div className="flex items-center gap-16 md:gap-24 animate-marquee py-4 whitespace-nowrap">
-                    {/* First Loop */}
-                    {universities.map((uni, index) => (
-                        <div key={`${uni.name}-${index}`} className="flex-shrink-0 flex items-center justify-center h-12 w-auto min-w-[100px]">
-                            <img
-                                src={uni.logo}
-                                alt={uni.name}
-                                className="h-full w-auto  opacity-100  hover:grayscale-0 hover:opacity-100 transition-all duration-300 max-h-10 md:max-h-12"
-                            />
-                        </div>
-                    ))}
-                    {/* Second Loop for seamless infinite scroll */}
-                    {universities.map((uni, index) => (
-                        <div key={`${uni.name}-duplicate-${index}`} className="flex-shrink-0 flex items-center justify-center h-12 w-auto min-w-[100px]">
-                            <img
-                                src={uni.logo}
-                                alt={uni.name}
-                                className="h-full w-auto object-contain opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 max-h-10 md:max-h-12"
-                            />
-                        </div>
-                    ))}
+            <ScrollReveal delay="delay-200" duration="duration-1000">
+                <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-128px),transparent_100%)]">
+                    <div className="flex items-center gap-16 md:gap-24 animate-marquee py-4 whitespace-nowrap">
+                        {/* First Loop */}
+                        {universities.map((uni, index) => (
+                            <div key={`${uni.name}-${index}`} className="flex-shrink-0 flex items-center justify-center h-12 w-auto min-w-[100px]">
+                                <img
+                                    src={uni.logo}
+                                    alt={uni.name}
+                                    className="h-full w-auto  opacity-100  hover:grayscale-0 hover:opacity-100 transition-all duration-300 max-h-10 md:max-h-12"
+                                />
+                            </div>
+                        ))}
+                        {/* Second Loop for seamless infinite scroll */}
+                        {universities.map((uni, index) => (
+                            <div key={`${uni.name}-duplicate-${index}`} className="flex-shrink-0 flex items-center justify-center h-12 w-auto min-w-[100px]">
+                                <img
+                                    src={uni.logo}
+                                    alt={uni.name}
+                                    className="h-full w-auto object-contain opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-300 max-h-10 md:max-h-12"
+                                />
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            </ScrollReveal>
         </div>
     );
 };

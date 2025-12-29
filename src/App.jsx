@@ -11,9 +11,12 @@ import StudentGuides from './components/StudentGuides';
 import Footer from './components/Footer';
 import AuthPage from './pages/AuthPage';
 
+import ScrollToTop from './components/ScrollToTop';
+
 function App() {
   return (
     <div className="min-h-screen bg-white font-sans text-gray-900">
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={
           <>

@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollReveal from './ScrollReveal';
 import finderIcon from '../assets/Images/finderIcon_ovbve3.svg.png';
 import booksIcon from '../assets/Images/booksIcon_gxakux.svg.png';
 import callOutIcon from '../assets/Images/callOut_v0nn6d.svg.png';
@@ -39,13 +40,15 @@ const Journey = () => {
     return (
         <div className="py-16 bg-white font-sans border-b border-gray-100">
             <div className="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
-                <h2 className="text-[28px] font-bold text-[#333333] mb-12 text-left">Begin your study abroad journey</h2>
+                <ScrollReveal>
+                    <h2 className="text-[28px] font-bold text-[#333333] mb-12 text-left">Begin your study abroad journey</h2>
+                </ScrollReveal>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-12">
                     {steps.map((step, index) => (
-                        <div key={index} className="flex flex-col items-center text-center group">
+                        <ScrollReveal key={index} delay={`delay-${index * 150}`} className="flex flex-col items-center text-center group h-full">
                             {/* Icon Container with Circle */}
-                            <div className={`mb-6 rounded-full ${step.iconBg} transition-transform transform  duration-300 flex items-center justify-center w-[110px] h-[110px]`}>
+                            <div className={`mb-6 rounded-full ${step.iconBg} transition-transform transform duration-300 flex items-center justify-center w-[110px] h-[110px] animate-in zoom-in-50 duration-500 delay-300`}>
                                 <img src={step.image} alt={step.title} className="w-[50%] h-[50%] object-contain" />
                             </div>
 
@@ -60,7 +63,7 @@ const Journey = () => {
                             <a href="#" className="text-[#d81b60] text-[14px] font-semibold hover:underline inline-flex items-center mt-auto border-b border-[#d81b60] pb-0.5">
                                 {step.linkText}
                             </a>
-                        </div>
+                        </ScrollReveal>
                     ))}
                 </div>
             </div>

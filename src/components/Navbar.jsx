@@ -155,7 +155,7 @@ const Navbar = () => {
 
             {/* Megamenu Overlay */}
             {activeMenu === 'programs' && (
-                <div className="hidden md:block absolute top-full left-1/2 -translate-x-1/2 w-[1150px] bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] z-40 p-8 mt-2 animate-in fade-in slide-in-from-top-4 duration-200 border border-gray-100">
+                <div className="hidden md:block absolute top-full left-1/2 -translate-x-1/2 w-[95vw] max-w-[1150px] bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] z-40 p-8 mt-2 animate-in fade-in slide-in-from-top-4 duration-200 border border-gray-100">
                     <div className="w-full">
                         <div className="flex flex-col lg:flex-row gap-12">
                             {/* Main Content Container */}
@@ -228,7 +228,7 @@ const Navbar = () => {
 
             {/* Resources Megamenu */}
             {activeMenu === 'resources' && (
-                <div className="hidden md:block absolute top-full left-1/2 -translate-x-1/2 w-[1150px] bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] z-40 p-8 mt-2 animate-in fade-in slide-in-from-top-4 duration-200 border border-gray-100">
+                <div className="hidden md:block absolute top-full left-1/2 -translate-x-1/2 w-[95vw] max-w-[1150px] bg-white rounded-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] z-40 p-8 mt-2 animate-in fade-in slide-in-from-top-4 duration-200 border border-gray-100">
                     <div className="w-full">
                         <div className="flex flex-col lg:flex-row gap-12">
 
@@ -311,7 +311,7 @@ const Navbar = () => {
                     ></div>
 
                     {/* Modal */}
-                    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] bg-white rounded-xl shadow-2xl z-[70] p-8 max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
+                    <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[95vw] max-w-[900px] bg-white rounded-xl shadow-2xl z-[70] p-8 max-h-[90vh] overflow-y-auto animate-in fade-in zoom-in-95 duration-200">
                         <div className="flex justify-between items-center mb-6">
                             <h2 className="text-xl font-bold text-gray-900">Select your language</h2>
                             <button

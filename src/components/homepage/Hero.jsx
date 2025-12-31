@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { Search, MapPin, ChevronRight, ChevronLeft } from 'lucide-react';
-import studentImage from '../assets/Images/hi_res_image_girl_dejjjz.png';
+import studentImage from '../../assets/Images/hi_res_image_girl_dejjjz.png';
 
 const Hero = () => {
     const scrollRef = useRef(null);

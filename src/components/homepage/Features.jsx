@@ -1,6 +1,6 @@
 import React from 'react';
 import { Microscope, Code, LineChart, Stethoscope, Palette, Gavel } from 'lucide-react';
-import ScrollReveal from './ScrollReveal';
+import ScrollReveal from '../ScrollReveal';
 
 const Features = () => {
     const disciplines = [

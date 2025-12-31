@@ -1,9 +1,9 @@
 import React from 'react';
-import ScrollReveal from './ScrollReveal';
-import finderIcon from '../assets/Images/finderIcon_ovbve3.svg.png';
-import booksIcon from '../assets/Images/booksIcon_gxakux.svg.png';
-import callOutIcon from '../assets/Images/callOut_v0nn6d.svg.png';
-import giftIcon from '../assets/Images/giftIcon_zinbkx.svg.png';
+import ScrollReveal from '../ScrollReveal';
+import finderIcon from '../../assets/Images/finderIcon_ovbve3.svg.png';
+import booksIcon from '../../assets/Images/booksIcon_gxakux.svg.png';
+import callOutIcon from '../../assets/Images/callOut_v0nn6d.svg.png';
+import giftIcon from '../../assets/Images/giftIcon_zinbkx.svg.png';
 
 const Journey = () => {
     const steps = [

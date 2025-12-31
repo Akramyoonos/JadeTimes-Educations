@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ChevronRight } from 'lucide-react';
-import ScrollReveal from './ScrollReveal';
+import ScrollReveal from '../ScrollReveal';
 
 const ExploreCountries = () => {
     const [activeTab, setActiveTab] = useState('Europe');

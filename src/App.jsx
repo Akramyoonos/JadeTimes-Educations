@@ -1,15 +1,13 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import TrustedBy from './components/TrustedBy';
-import ProgramCategories from './components/ProgramCategories';
-import Journey from './components/Journey';
-import ExploreCountries from './components/ExploreCountries';
-import Scholarships from './components/Scholarships';
-import StudentGuides from './components/StudentGuides';
+import Home from './pages/Home';
 import Footer from './components/Footer';
 import AuthPage from './pages/AuthPage';
+import AdminDashboard from './pages/AdminDashboard';
+import UniversityDashboard from './pages/UniversityDashboard';
+import StudentDashboard from './pages/StudentDashboard';
+import ProgramsDashboard from './pages/ProgramsDashboard';
 
 import ScrollToTop from './components/ScrollToTop';
 
@@ -21,21 +19,17 @@ function App() {
         <Route path="/" element={
           <>
             <Navbar />
-            <main>
-              <Hero />
-              <TrustedBy />
-              <ProgramCategories />
-              <Journey />
-              <ExploreCountries />
-              <Scholarships />
-              <StudentGuides />
-            </main>
+            <Home />
             <Footer />
           </>
         } />
         <Route path="/login" element={<AuthPage />} />
         <Route path="/signup" element={<AuthPage />} />
         <Route path="/forgot-password" element={<AuthPage />} />
+        <Route path="/admin-dashboard" element={<AdminDashboard />} />
+        <Route path="/university-dashboard" element={<UniversityDashboard />} />
+        <Route path="/student-dashboard" element={<StudentDashboard />} />
+        <Route path="/programs" element={<ProgramsDashboard />} />
       </Routes>
     </div>
   );

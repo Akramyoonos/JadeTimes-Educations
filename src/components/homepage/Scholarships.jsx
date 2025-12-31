@@ -1,6 +1,6 @@
 import React from 'react';
 import { ChevronRight } from 'lucide-react';
-import ScrollReveal from './ScrollReveal';
+import ScrollReveal from '../ScrollReveal';
 
 const Scholarships = () => {
     const scholarships = [

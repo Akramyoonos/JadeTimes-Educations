@@ -1,6 +1,6 @@
 import React from 'react';
 import { GraduationCap, ArrowRight } from 'lucide-react';
-import ScrollReveal from './ScrollReveal';
+import ScrollReveal from '../ScrollReveal';
 
 const ProgramCategories = () => {
     const categories = [

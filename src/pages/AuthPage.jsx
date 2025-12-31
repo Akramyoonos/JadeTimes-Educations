@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Mail, Lock, User, ArrowLeft } from 'lucide-react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import logoText from '../assets/Images/Educations-40_cvcack.png';
+import { mockBackend } from '../utils/mockBackend';
 
 const AuthPage = () => {
     const navigate = useNavigate();
@@ -44,19 +45,40 @@ const AuthPage = () => {
 
     // Form States
     const [loginData, setLoginData] = useState({ email: '', password: '' });
-    const [signupData, setSignupData] = useState({ email: '', firstName: '', lastName: '', password: '' });
+    const [signupData, setSignupData] = useState({ email: '', firstName: '', lastName: '', password: '', role: 'student' });
     const [forgotData, setForgotData] = useState({ email: '' });
+    const [error, setError] = useState('');
 
-    const handleLoginSubmit = (e) => {
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
-        console.log('Login submitted:', loginData);
-        // TODO: API integration
+        setError('');
+        try {
+            const { user } = await mockBackend.login(loginData.email, loginData.password);
+            localStorage.setItem('currentUser', JSON.stringify(user));
+
+            if (user.role === 'admin') navigate('/admin-dashboard');
+            else if (user.role === 'university') navigate('/university-dashboard');
+            else navigate('/');
+
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
-    const handleSignupSubmit = (e) => {
+    const handleSignupSubmit = async (e) => {
         e.preventDefault();
-        console.log('Signup submitted:', signupData);
-        // TODO: API integration
+        setError('');
+        try {
+            const { user } = await mockBackend.signup(signupData);
+            localStorage.setItem('currentUser', JSON.stringify(user));
+
+            if (user.role === 'admin') navigate('/admin-dashboard');
+            else if (user.role === 'university') navigate('/university-dashboard');
+            else navigate('/');
+
+        } catch (err) {
+            setError(err.message);
+        }
     };
 
     const handleForgotSubmit = (e) => {
@@ -85,6 +107,12 @@ const AuthPage = () => {
                 <div className="flex justify-center mb-8">
                     <img src={logoText} alt="educations.com" className="h-[42px] object-contain" />
                 </div>
+
+                {error && (
+                    <div className="bg-red-50 text-red-500 text-sm p-3 rounded mb-4 text-center">
+                        {error}
+                    </div>
+                )}
 
                 {/* LOGIN VIEW */}
                 {isLogin && (
@@ -181,6 +209,33 @@ const AuthPage = () => {
                         </div>
 
                         <form className="space-y-5" onSubmit={handleSignupSubmit}>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-gray-500 text-sm mb-1">First Name</label>
+                                    <input
+                                        type="text"
+                                        name="firstName"
+                                        value={signupData.firstName}
+                                        onChange={(e) => handleInputChange(e, setSignupData)}
+                                        className="w-full border border-gray-300 rounded px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-teal-500 text-gray-700"
+                                        placeholder="First Name"
+                                        required
+                                    />
+                                </div>
+                                <div>
+                                    <label className="block text-gray-500 text-sm mb-1">Last Name</label>
+                                    <input
+                                        type="text"
+                                        name="lastName"
+                                        value={signupData.lastName}
+                                        onChange={(e) => handleInputChange(e, setSignupData)}
+                                        className="w-full border border-gray-300 rounded px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-teal-500 text-gray-700"
+                                        placeholder="Last Name"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
                             <div>
                                 <label className="block text-gray-500 text-sm mb-1">Email</label>
                                 <input
@@ -195,29 +250,17 @@ const AuthPage = () => {
                             </div>
 
                             <div>
-                                <label className="block text-gray-500 text-sm mb-1">First Name</label>
-                                <input
-                                    type="text"
-                                    name="firstName"
-                                    value={signupData.firstName}
+                                <label className="block text-gray-500 text-sm mb-1">I am a</label>
+                                <select
+                                    name="role"
+                                    value={signupData.role}
                                     onChange={(e) => handleInputChange(e, setSignupData)}
-                                    className="w-full border border-gray-300 rounded px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-teal-500 text-gray-700"
-                                    placeholder="First Name"
-                                    required
-                                />
-                            </div>
-
-                            <div>
-                                <label className="block text-gray-500 text-sm mb-1">Last Name</label>
-                                <input
-                                    type="text"
-                                    name="lastName"
-                                    value={signupData.lastName}
-                                    onChange={(e) => handleInputChange(e, setSignupData)}
-                                    className="w-full border border-gray-300 rounded px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-teal-500 text-gray-700"
-                                    placeholder="Last Name"
-                                    required
-                                />
+                                    className="w-full border border-gray-300 rounded px-3 py-2.5 focus:outline-none focus:ring-1 focus:ring-teal-500 text-gray-700 bg-white"
+                                >
+                                    <option value="student">Student</option>
+                                    <option value="university">University</option>
+                                    <option value="admin">Admin</option>
+                                </select>
                             </div>
 
                             <div>

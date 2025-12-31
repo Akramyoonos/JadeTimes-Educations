@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { Globe, ArrowRightToLine, ChevronDown, Menu, X, Compass, FileText, Check, ChevronRight, ExternalLink } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom';
+import { Globe, ArrowRightToLine, ChevronDown, Menu, X, Compass, FileText, Check, ChevronRight, ExternalLink, User } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import logoText from '../assets/Images/Educations-40_cvcack.png';
 
 const Navbar = () => {
+    const location = useLocation();
     const [isOpen, setIsOpen] = useState(false);
     const [activeMenu, setActiveMenu] = useState(null);
     const [activeTab, setActiveTab] = useState('Fields of study');
@@ -106,25 +107,27 @@ const Navbar = () => {
                         </div>
 
                         {/* Desktop Menu */}
-                        <div className="hidden md:flex items-center space-x-8 ml-8">
-                            <div
-                                className={`relative group cursor-pointer flex items-center gap-2 transition-colors ${activeMenu === 'programs' ? 'text-teal-600' : 'text-gray-700 hover:text-teal-600'}`}
-                                onClick={() => toggleMenu('programs')}
-                            >
-                                <Compass className="w-[18px] h-[18px]" strokeWidth={2} />
-                                <span className="font-medium text-[15px]">Programs</span>
-                                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeMenu === 'programs' ? 'rotate-180 text-teal-600' : 'text-gray-400 group-hover:text-teal-600'}`} />
-                            </div>
+                        {!location.pathname.includes('dashboard') && (
+                            <div className="hidden md:flex items-center space-x-8 ml-8">
+                                <div
+                                    className={`relative group cursor-pointer flex items-center gap-2 transition-colors ${activeMenu === 'programs' ? 'text-teal-600' : 'text-gray-700 hover:text-teal-600'}`}
+                                    onClick={() => toggleMenu('programs')}
+                                >
+                                    <Compass className="w-[18px] h-[18px]" strokeWidth={2} />
+                                    <span className="font-medium text-[15px]">Programs</span>
+                                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeMenu === 'programs' ? 'rotate-180 text-teal-600' : 'text-gray-400 group-hover:text-teal-600'}`} />
+                                </div>
 
-                            <div
-                                className={`relative group cursor-pointer flex items-center gap-2 transition-colors ${activeMenu === 'resources' ? 'text-teal-600' : 'text-gray-700 hover:text-teal-600'}`}
-                                onClick={() => toggleMenu('resources')}
-                            >
-                                <FileText className="w-[18px] h-[18px]" strokeWidth={2} />
-                                <span className="font-medium text-[15px]">Resources</span>
-                                <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeMenu === 'resources' ? 'rotate-180 text-teal-600' : 'text-gray-400 group-hover:text-teal-600'}`} />
+                                <div
+                                    className={`relative group cursor-pointer flex items-center gap-2 transition-colors ${activeMenu === 'resources' ? 'text-teal-600' : 'text-gray-700 hover:text-teal-600'}`}
+                                    onClick={() => toggleMenu('resources')}
+                                >
+                                    <FileText className="w-[18px] h-[18px]" strokeWidth={2} />
+                                    <span className="font-medium text-[15px]">Resources</span>
+                                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeMenu === 'resources' ? 'rotate-180 text-teal-600' : 'text-gray-400 group-hover:text-teal-600'}`} />
+                                </div>
                             </div>
-                        </div>
+                        )}
 
                         {/* Right Side Icons */}
                         <div className="hidden md:flex items-center space-x-8 ml-auto">
@@ -134,10 +137,21 @@ const Navbar = () => {
                             >
                                 <Globe className="w-5 h-5" strokeWidth={2} />
                             </button>
-                            <Link to="/login" className="flex items-center text-gray-600 hover:text-teal-600 font-medium text-[15px] transition-colors gap-2">
-                                <ArrowRightToLine className="w-5 h-5" strokeWidth={2} />
-                                Sign in
-                            </Link>
+                            {JSON.parse(localStorage.getItem('currentUser')) ? (
+                                <Link
+                                    to={JSON.parse(localStorage.getItem('currentUser')).role === 'admin' ? '/admin-dashboard' :
+                                        JSON.parse(localStorage.getItem('currentUser')).role === 'university' ? '/university-dashboard' : '/student-dashboard'}
+                                    className="flex items-center text-gray-600 hover:text-teal-600 font-medium text-[15px] transition-colors gap-2"
+                                >
+                                    <User className="w-5 h-5" strokeWidth={2} />
+                                    <span>Dashboard</span>
+                                </Link>
+                            ) : (
+                                <Link to="/login" className="flex items-center text-gray-600 hover:text-teal-600 font-medium text-[15px] transition-colors gap-2">
+                                    <ArrowRightToLine className="w-5 h-5" strokeWidth={2} />
+                                    Sign in
+                                </Link>
+                            )}
                         </div>
 
                         {/* Mobile menu button */}
@@ -196,9 +210,13 @@ const Navbar = () => {
                                                 <p className="text-gray-600 text-sm mb-4 leading-relaxed flex-1">
                                                     Explore programs by major and degree type!
                                                 </p>
-                                                <a href="#" className="inline-block text-[#880e43] font-semibold text-sm hover:underline underline-offset-4 decoration-2 mt-auto">
+                                                <Link
+                                                    to="/programs"
+                                                    onClick={() => setActiveMenu(null)}
+                                                    className="inline-block text-[#880e43] font-semibold text-sm hover:underline underline-offset-4 decoration-2 mt-auto"
+                                                >
                                                     Find programs
-                                                </a>
+                                                </Link>
                                             </div>
                                         </div>
                                     </div>
